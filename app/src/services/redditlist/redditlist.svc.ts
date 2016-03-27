@@ -2,12 +2,13 @@ import {async, register} from 'platypus';
 import BaseService from '../base/base.svc';
 
 export default class RedditListService extends BaseService {
-    getList(): async.IAjaxThenable<Array<models.ISubReddit>> {
-        return this.http.json<Array<models.ISubReddit>>({
+    getList(): async.IAjaxThenable<Array<any>> {
+        return this.http.json({
             method: 'GET',
-            url: this.host,
+            url: this.host
         }).then((success) => {
-            return success.response.data.children;
+            let stuff: any = success;
+            return stuff.response.data.children;
         }, (err) => {
             console.log(err);
             throw err;
