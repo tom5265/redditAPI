@@ -25,9 +25,6 @@ export default class RedditListerRepository extends BaseRepository {
     }
 
     getOneReddit(nameKey: any) {
-        if (this.containerArray.length === 0) {
-            this.getAllReddits();
-        }
         
         for (var i = 0; i < this.containerArray.length; i++) {
             if (this.containerArray[i].id === nameKey) {
