@@ -15,6 +15,4 @@ export default class RedditListService extends BaseService {
     }
     }
 
-
-
 register.injectable('redditlist-svc', RedditListService);

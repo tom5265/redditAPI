@@ -9,32 +9,36 @@ export default class RedditListerRepository extends BaseRepository {
     }
 
     getAllReddits(): async.IThenable<Array<models.ISubReddit>> {
-        return this.redSvc.getList().then((success) => {
-            this.containerArray = [];
-            success.forEach((post) => {
-                let redd: models.ISubReddit = {
-                    title: post.data.title,
-                    author: post.data.author,
-                    id: post.data.id,
-                    url: post.data.url,
-                    selftext: post.data.selftext
-                }
-                this.containerArray.push(redd);
+        if (this.containerArray.length === 0) {
+            return this.redSvc.getList().then((success) => {
+                this.containerArray = [];
+                success.forEach((post) => {
+                    let redd: models.ISubReddit = {
+                        title: post.data.title,
+                        author: post.data.author,
+                        id: post.data.id,
+                        url: post.data.url,
+                        selftext: post.data.selftext
+                    }
+                    this.containerArray.push(redd);
+                });
+                return this.containerArray;
             });
-            return this.containerArray;
-        })
+        } else {
+            return this.Promise.resolve(this.containerArray);
+        }   
     }
 
-    getOneReddit(nameKey: any) {
+    getOneReddit(nameKey: any): async.IThenable<models.ISubReddit> {
         
-        for (var i = 0; i < this.containerArray.length; i++) {
-            if (this.containerArray[i].id === nameKey) {
-                return this.containerArray[i];
+        return this.getAllReddits().then((reddits) => {
+            for (var i = 0; i < reddits.length; i++) {
+                if (reddits[i].id === nameKey) {
+                    return reddits[i];
+                }
             }
-        }
+        });
     }
 }
-
-
 
 register.injectable('redditlister-repo', RedditListerRepository, [RedditListService]);

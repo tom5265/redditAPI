@@ -15,12 +15,10 @@ export default class SinglePostViewControl extends BaseViewControl {
     };
     
     navigatedTo(parameters: { id: string } ): void { 
-        this.redRepo.getAllReddits().then((success) => {
-            console.log(success);
-            this.context.reddits = success;
-        }).then((success) => {
         let id = parameters.id;
-        this.context = this.redRepo.getOneReddit(id)})    
+        this.redRepo.getOneReddit(id).then((r) => {
+            this.context = r;
+        });
         
     }
     
