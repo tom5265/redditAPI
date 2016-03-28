@@ -16,7 +16,8 @@ export default class RedditListerRepository extends BaseRepository {
                     title: post.data.title,
                     author: post.data.author,
                     id: post.data.id,
-                    url: post.data.url
+                    url: post.data.url,
+                    selftext: post.data.selftext
                 }
                 this.containerArray.push(redd);
             });

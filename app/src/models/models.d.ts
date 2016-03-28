@@ -3,6 +3,7 @@ declare module models {
         title: string,
         author: string,
         url: string,
-        id?: string
+        id?: string,
+        selftext: string
     }
 }
