@@ -23,7 +23,16 @@ export default class RedditListerRepository extends BaseRepository {
             return this.containerArray;
         })
     }
+
+    getOneReddit(nameKey: any) {
+        for (var i = 0; i < this.containerArray.length; i++) {
+            if (this.containerArray[i].id === nameKey) {
+                return this.containerArray[i];
+            }
+        }
+    }
 }
+
 
 
 register.injectable('redditlister-repo', RedditListerRepository, [RedditListService]);

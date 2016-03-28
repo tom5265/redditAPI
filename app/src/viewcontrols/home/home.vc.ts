@@ -1,6 +1,7 @@
 import {register} from 'platypus';
 import BaseViewControl from '../base/base.vc';
 import RedditListerRepository from '../../repositories/redditlister/redditlister.repo';
+import SinglePostViewControl from '../singlepost/singlepost.vc';
 
 
 export default class HomeViewControl extends BaseViewControl {
@@ -23,6 +24,15 @@ export default class HomeViewControl extends BaseViewControl {
             console.log(err);
         });
     }
+    
+     readMore(postId: string): void {
+        this.navigator.navigate(SinglePostViewControl, {
+            parameters: {
+                id: postId
+            }
+        }
+        )}
+    
 }
 
 register.viewControl('home-vc', HomeViewControl, [RedditListerRepository]);
