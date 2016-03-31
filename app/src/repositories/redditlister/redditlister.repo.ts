@@ -29,8 +29,7 @@ export default class RedditListerRepository extends BaseRepository {
         }   
     }
 
-    getOneReddit(nameKey: any): async.IThenable<models.ISubReddit> {
-        
+    getOneReddit(nameKey: any): async.IThenable<models.ISubReddit> {   
         return this.getAllReddits().then((reddits) => {
             for (var i = 0; i < reddits.length; i++) {
                 if (reddits[i].id === nameKey) {
